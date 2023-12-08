@@ -2,8 +2,10 @@ package week04;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Week04StringBuilderListSetMapLab {
@@ -144,20 +146,51 @@ public class Week04StringBuilderListSetMapLab {
 				
 				// 13. Create a map of string and string and add 3 items to it where the key of each
 				// 			is a word and the value is the definition of the word
-
-			
+				Map<String, String> dictionary = new HashMap<String, String>();
+				dictionary.put("Apple", "A cruchy fruit. Usually red, gree, or yellow");
+				dictionary.put("Banana", "A yellow fruit which you peel before eating");
+				dictionary.put("Java", "A programming language created in 1995 and still heavily used today");
 				
 				// 14. Write and test a method that takes a Map<String, String> and a string 
 				// 			and returns the value for a key in the map that matches the
 				// 			string parameter (i.e. like a language dictionary lookup)
-
+				String value = lookupValue(dictionary, "Java");
+				System.out.println(value);
 				
 				// 15. Write and test a method that takes a List<String> 
 				//			and returns a Map<Character, Integer> containing a count of 
 				//			all the strings that start with a given character
-				
-
+				Map<Character, Integer> counts = countStartingLetters(resultList);
+				for (Character character : counts.keySet()) {
+					System.out.println(character + " - " + counts.get(character));
+					
+				}
 			}
+	
+		public static Map<Character, Integer> countStartingLetters(List<String> list){
+			Map<Character, Integer> results = new HashMap<Character, Integer>();
+			
+			for (String string : list) {
+				char c = string.charAt(0);
+				if (results.get(c ) == null) {
+					results.put(c, 1);
+				} else {
+					results.put(c, results.get(c) + 1);
+				}
+			}
+			
+			return results;
+			
+		}
+	
+		public static String lookupValue(Map<String, String> map, String string) {
+			for (String key : map.keySet()) {
+				if (key.equals(string)) {
+					return map.get(key);
+				}
+			}
+			return "";
+		}
 	
 		public static Set<Integer> extractEvens(Set<Integer> set){
 			Set<Integer> results = new HashSet<Integer>();
